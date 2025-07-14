@@ -1,0 +1,32 @@
+{
+    "custom": {
+        "business_name": {
+            "required": "Le nom de l'entreprise est obligatoire",
+            "max": "Le nom de l'entreprise ne doit pas dépasser :max caractères"
+        },
+        "email": {
+            "required": "L'adresse email est obligatoire",
+            "unique": "Cette adresse email est déjà utilisée",
+            "email": "Veuillez entrer une adresse email valide"
+        },
+        "password": {
+            "required": "Le mot de passe est obligatoire",
+            "min": "Le mot de passe doit contenir au moins :min caractères"
+        },
+        "owner_fullname": {
+            "required": "Le nom complet du propriétaire est obligatoire",
+            "name": "Veuillez entrer un nom valide (lettres et espaces seulement)"
+        },
+        "business_image": {
+            "image": "Le fichier doit être une image (jpeg, png, jpg, gif)",
+            "max": "L'image ne doit pas dépasser :max Ko"
+        }
+    },
+    "attributes": {
+        "business_name": "nom de l'entreprise",
+        "email": "adresse email",
+        "password": "mot de passe",
+        "owner_fullname": "nom complet du propriétaire",
+        "business_image": "image de l'entreprise"
+    }
+}
