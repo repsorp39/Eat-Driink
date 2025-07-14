@@ -41,4 +41,21 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function isWaitingStand(){
+        return $this->role === "waiting";
+    }
+
+    public function isAdmin(){
+        return $this->role === "admin";
+    }
+
+    public function isRejected(){
+        return $this->role === "rejected";
+    }
+
+
+    public function stands(){
+        return $this->hasOne(Stand::class);
+    }
 }

@@ -60,9 +60,9 @@
 
     &::after {
         content: "";
-        height: 2px;
+        height: 1px;
         width: 0;
-        background: rgb(7, 136, 201);
+        background: rgb(169, 176, 180);
         position: absolute;
         border-radius: 10px;
         bottom: 0px;
@@ -79,4 +79,11 @@
     to {
         width: 100%;
     }
+}
+
+.modal-view{
+    filter: blur(10px);
+    opacity: 0.3;
+    filter: brightness(15px);
+    pointer-events: none;
 }

@@ -4,14 +4,30 @@
     </div>
     <nav>
         <ul class="flex items-center gap-5">
-            <li><a href="#">Nos exposants</a></li>
-            <li><a href="#">À propos</a></li>
-            <li><a href="/#contacter">Nous contacter</a></li>
+            <li><a href="/">Accueil</a></li>
+            @guest
+                <li><a href="#">Nos exposants</a></li>
+            @endguest            
+            @notadmin()
+                <li><a href="/#contacter">Nous contacter</a></li>
+            @endnotadmin
+            @admin
+                <li>
+                    <a
+                        href="{{ route("dashboard") }}"
+                        class="{{ request()->routeIs("dashboard") ? "activeLink" : ""}}"
+                        >Dashboard
+                    </a>
+                </li>           
+            @endadmin
             @standwaiting
-                <li><a
-                     href="{{ route("status") }}"
-                     class="{{ request()->routeIs("status") ? "activeLink" : ""}}"
-                    >Statut demande</a></li>
+                <li>
+                    <a
+                        href="{{ route("status") }}"
+                        class="{{ request()->routeIs("status") ? "activeLink" : ""}}"
+                        >Statut demande
+                    </a>
+                </li>
             @endstandwaiting
         </ul>
     </nav>

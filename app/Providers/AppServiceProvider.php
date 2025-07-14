@@ -22,7 +22,15 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Blade::if("standwaiting", function(){
-            return Auth::check() && Auth::user()->role === "waiting";
+            return Auth::check() && Auth::user()->isWaitingStand();
+        });
+
+        Blade::if("admin",function(){
+             return Auth::check() && Auth::user()->isAdmin();
+        });
+
+        Blade::if("notadmin",function(){
+             return !Auth::check() ||  (Auth::check() && !Auth::user()->isAdmin());
         });
     }
 }

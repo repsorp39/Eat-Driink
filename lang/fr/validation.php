@@ -22,9 +22,9 @@ return [
             'max' => 'Le nom de l\'entreprise ne peut excéder 150 caractères',
         ],
         'email' => [
-            'required' => 'L\'adresse email est obligatoire pour créer votre compte',
+            'required' => 'L\'adresse email est obligatoire ',
             'unique' => 'Cette adresse email est déjà associée à un compte existant',
-            'email' => 'Veuillez saisir une adresse email valide (ex: contact@votredomaine.com)',
+            'email' => 'Veuillez saisir une adresse email valide',
             'exists' => 'Aucun utilisateur correspondant'
         ],
         'password' => [

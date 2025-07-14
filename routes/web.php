@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\StandController;
 use App\Http\Controllers\WaitingBusinessController;
+use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\standWaitingMiddleware;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -22,4 +25,16 @@ Route::controller(LoginController::class)->prefix('/login')->group(
     }
 );
 
-Route::get("/request-status",[WaitingBusinessController::class,'serve'])->name("status");
+Route::get("/request-status",[WaitingBusinessController::class,'serve'])
+    ->middleware([standWaitingMiddleware::class])
+    ->name("status");
+
+Route::controller(AdminController::class)
+    ->middleware(AdminMiddleware::class)
+    ->prefix("/admin")
+    ->group(function(){
+        Route::get("/", "serve")->name("dashboard");
+        Route::get("/reject/","rejectRequest")->name("reject");
+        Route::get("/approved/","approvedRequest")->name("approved");
+    });
+

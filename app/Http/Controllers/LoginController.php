@@ -14,12 +14,19 @@ class LoginController extends Controller
 
     public function login(Request $req){
         $validated = $req->validate([
-            "email" => ["email","exists:users,email"],
+            "email" => ["required","email","exists:users,email"],
             "password" => ["required",Password::min(8)]
         ]);
 
         if(Auth::attempt($validated)){
-            return redirect()->route("status");
+           if(Auth::user()->isWaitingStand() || Auth::user()->isRejected()){
+                return redirect()->route("status");
+           }else if(Auth::user()->isAdmin()){
+                return redirect("/admin/");
+           }
+           else{
+                return redirect("/");
+           }
         }
 
         return redirect()->back()->with("error","Email ou mot de passe incorrecte!");

@@ -30,7 +30,7 @@
                             value="{{ old("email") }}"
                         />
                         @error("email")
-                            <p class="label text-red-700"> {{ $message }} </p>
+                            <p class="label text-red-700 max-w-[300px] break-words break-all"> {{ $message }} </p>
                         @enderror
                     </div>
 

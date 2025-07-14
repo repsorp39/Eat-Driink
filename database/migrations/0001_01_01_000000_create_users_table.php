@@ -17,9 +17,10 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('motif_rejected')->nullable();
             $table->rememberToken();
             $table->timestamps();
-            $table->enum("role",["admin","approved","waiting"])->default("waiting");
+            $table->enum("role",["admin","approved","waiting","rejected"])->default("waiting");
             $table->string("owner_fullname");
             $table->string("business_img")->default("/images/default-business.avif");
         });

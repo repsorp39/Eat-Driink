@@ -64,33 +64,35 @@
             </section>
         @endguest
 
-        <section id="contacter" class="py-5  mx-auto">
-            <div class="flex gap-5 border-2 border-gray-200 py-5">
-                <div class="w-1/2 flex justify-center flex-col items-center">
-                    <div>
-                        <img  class="w-[200px] h-[200px]" src="/images/eat-drink-logo.png" alt="">
+       @notadmin
+            <section id="contacter" class="py-5  mx-auto">
+                <div class="flex gap-5 border-2 border-gray-200 py-5">
+                    <div class="w-1/2 flex justify-center flex-col items-center">
+                        <div>
+                            <img  class="w-[200px] h-[200px]" src="/images/eat-drink-logo.png" alt="">
+                        </div>
+                    </div>
+                    <div class="w-1/2">
+                        <h1 class="text-4xl text-NunitoBold mb-5">Contactez-nous </h1>
+                        <form action="" class="p-3 ">
+                            <div class="mb-3">
+                                <label for="email" class="label block">Email</label>
+                                <input class="input w-full text-black" type="email" id="email" name="email" placeholder="monemail@email.com" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="motif" class="label block">Motif</label>
+                                <input class="input block w-full text-black" type="text" placeholder="Informations" id="motif" name="motif" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="description" class="label block">Description</label>
+                                <textarea class="input w-full h-[80px] text-black" type="text" id="description" name="description" placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit. " required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-accent ">Soumettre</button>
+                        </form>
                     </div>
                 </div>
-                <div class="w-1/2">
-                     <h1 class="text-4xl text-NunitoBold mb-5">Contactez-nous </h1>
-                    <form action="" class="p-3 ">
-                        <div class="mb-3">
-                            <label for="email" class="label block">Email</label>
-                            <input class="input w-full text-black" type="email" id="email" name="email" placeholder="monemail@email.com" required />
-                        </div>
-                        <div class="mb-3">
-                            <label for="motif" class="label block">Motif</label>
-                            <input class="input block w-full text-black" type="text" placeholder="Informations" id="motif" name="motif" required />
-                        </div>
-                        <div class="mb-3">
-                            <label for="description" class="label block">Description</label>
-                            <textarea class="input w-full h-[80px] text-black" type="text" id="description" name="description" placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit. " required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-accent ">Soumettre</button>
-                    </form>
-                </div>
-            </div>
-        </section>
+            </section>
+       @endnotadmin
     </section>
 @endsection
 
