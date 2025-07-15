@@ -46,9 +46,8 @@ Route::controller(ProductController::class)
     ->group(function(){
         Route::get("/","serve")->name("product");
         Route::get("/delete","delete")->name("product-delete");
-        Route::get("/{id}","get");
-        Route::get("/news","serveForm")->name("product-form");
-        Route::post("/new","create")->name("new-product");
+        Route::get("/new","serveForm")->name("product-form");
+        Route::get("/form-edit/{id}","serveFormEdit")->name("product-edit");
+        Route::post("/edit/new","create")->name("new-product");
         Route::post("/update","update")->name("product-update");
-
     });

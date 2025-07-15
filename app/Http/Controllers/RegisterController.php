@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Stand;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rules\File;
 use Illuminate\Validation\Rules\Password;
 
 

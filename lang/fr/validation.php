@@ -48,6 +48,18 @@ return [
             'required' => 'Vous devez fournir une description à votre stand',
             'max' => 'La taille de ce champ ne peut dépasser :max',
         ],
+        'name' => [
+            'required' => 'Le nom du produit est requis',
+        ],
+        'image_url' => [
+            'required' => 'Une image illustrative est requise',
+            'max' => 'Max taille 2MB',
+            'mimes' => 'Format images autorisées:png,jpeg,jpg'
+        ],
+        'price' => [
+            'required' => 'Le montant du produit est requis',
+            'numeric' => 'Le montrant doit être un nombre réel'
+        ],
     ],
 
     /*
@@ -76,3 +88,4 @@ return [
         'uncompromised' => 'Ce mot de passe a été compromis dans une fuite de données',
     ],
 ];
+

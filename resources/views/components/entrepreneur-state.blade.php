@@ -68,7 +68,6 @@
                         @foreach ($requests as $request)
                         <tr 
                             class="hover:bg-gray-800/50 transition-colors duration-150"
-                            x-data="{ open: false }"
                         >
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
