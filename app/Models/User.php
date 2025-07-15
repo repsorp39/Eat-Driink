@@ -54,6 +54,10 @@ class User extends Authenticatable
         return $this->role === "rejected";
     }
 
+    public function isApproved(){
+        return $this->role === "approved";
+    }
+
 
     public function stands(){
         return $this->hasOne(Stand::class);

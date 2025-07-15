@@ -21,11 +21,12 @@ class LoginController extends Controller
         if(Auth::attempt($validated)){
            if(Auth::user()->isWaitingStand() || Auth::user()->isRejected()){
                 return redirect()->route("status");
-           }else if(Auth::user()->isAdmin()){
+           }
+           else if(Auth::user()->isAdmin()){
                 return redirect("/admin/");
            }
-           else{
-                return redirect("/");
+           else if(Auth::user()->isApproved()){
+                return redirect("/products");
            }
         }
 

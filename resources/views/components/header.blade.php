@@ -7,7 +7,12 @@
             <li><a href="/">Accueil</a></li>
             @guest
                 <li><a href="#">Nos exposants</a></li>
-            @endguest            
+            @endguest   
+            @approved()
+                <li><a href="/products" class="{{request()->routeIs("product") ? "activeLink":"" }}" >Mes produits</a></li>
+                <li><a href="#">Mes commandes</a></li>
+                <li><a href="#">Dashboard</a></li>
+            @endapproved         
             @notadmin()
                 <li><a href="/#contacter">Nous contacter</a></li>
             @endnotadmin

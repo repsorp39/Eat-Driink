@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\StandController;
 use App\Http\Controllers\WaitingBusinessController;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\ApprovedUserMiddleware;
 use App\Http\Middleware\standWaitingMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -38,3 +40,15 @@ Route::controller(AdminController::class)
         Route::get("/approved/","approvedRequest")->name("approved");
     });
 
+Route::controller(ProductController::class)
+    ->middleware(ApprovedUserMiddleware::class)
+    ->prefix("/products")
+    ->group(function(){
+        Route::get("/","serve")->name("product");
+        Route::get("/delete","delete")->name("product-delete");
+        Route::get("/{id}","get");
+        Route::get("/news","serveForm")->name("product-form");
+        Route::post("/new","create")->name("new-product");
+        Route::post("/update","update")->name("product-update");
+
+    });

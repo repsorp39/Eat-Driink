@@ -8,4 +8,7 @@ class Product extends Model
 {
     protected $guarded = [];
 
+    public function stand(){
+        $this->belongsTo(Stand::class);
+    }
 }
