@@ -6,7 +6,7 @@
         <ul class="flex items-center gap-5">
             <li><a href="/">Accueil</a></li>
             @guest
-                <li><a href="#">Nos exposants</a></li>
+                <li><a href="/stands" class="{{request()->routeIs("stand") || request()->routeIs("stand-info") ? "activeLink":"" }}" >Nos exposants</a></li>
             @endguest   
             @approved()
                 <li><a href="/products" class="{{request()->routeIs("product") ? "activeLink":"" }}" >Mes produits</a></li>

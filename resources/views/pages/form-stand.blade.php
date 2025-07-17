@@ -2,8 +2,10 @@
 @section("content")
     <section class="py-8">
      <div>
-        <a href="/" class="btn btn-outline btn-success"><i class="bi bi-arrow-left text-4xl"></i></a>
-    </div>
+        <a href="/" class="btn btn-outline btn-circle btn-accent">
+            <i class="bi bi-arrow-left"></i>
+        </a>   
+     </div>
      <div class="mt-2">
         <div class="py-5">
             <div class="w-[50%] mx-auto bg-gray-800">

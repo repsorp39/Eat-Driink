@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\GuestUserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\StandController;
+use App\Http\Controllers\VisitorController;
 use App\Http\Controllers\WaitingBusinessController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\ApprovedUserMiddleware;
@@ -50,4 +52,11 @@ Route::controller(ProductController::class)
         Route::get("/form-edit/{id}","serveFormEdit")->name("product-edit");
         Route::post("/edit/new","create")->name("new-product");
         Route::post("/update","update")->name("product-update");
+    });
+
+
+Route::controller(VisitorController::class)
+    ->group(function(){
+        Route::get("/stands", "serve")->name("stand");
+        Route::get("/stands/{id}", "serveDetails")->name("stand-info");
     });

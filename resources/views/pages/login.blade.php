@@ -5,7 +5,9 @@
 @section("content")
 <section class="p-5">
     <div>
-        <a href="/" class="btn btn-outline btn-success"><i class="bi bi-arrow-left text-4xl"></i></a>
+        <a href="/" class="btn btn-outline btn-circle btn-accent">
+            <i class="bi bi-arrow-left"></i>
+        </a>
     </div>
     <section class="w-[400px] mx-auto">
         <form action="{{ route("login-post") }}" class="bg-gray-800 shadow-lg p-4 rounded-md" method="POST" class="p-3 [&_input]:text-black" enctype="multipart/form-data">
