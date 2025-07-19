@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\GuestUserController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\StandController;
@@ -11,6 +11,7 @@ use App\Http\Controllers\WaitingBusinessController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\ApprovedUserMiddleware;
 use App\Http\Middleware\standWaitingMiddleware;
+use App\Models\Stand;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -59,4 +60,8 @@ Route::controller(VisitorController::class)
     ->group(function(){
         Route::get("/stands", "serve")->name("stand");
         Route::get("/stands/{id}", "serveDetails")->name("stand-info");
+        Route::get("/product-info","getCardProductInfo");
     });
+
+Route::get("/search/all",[StandController::class,"search"]);
+Route::post("/order",[OrderController::class,"order"]);

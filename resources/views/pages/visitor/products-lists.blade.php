@@ -6,10 +6,13 @@
 
 @section("content")
     <section class="min-h-screen">
-        <a href="{{ route("stand") }}" class="btn btn-outline btn-circle btn-accent">
+        <a href="{{ route("stand") }}" class="btn btn-outline btn-circle btn-light">
             <i class="bi bi-arrow-left"></i>
         </a>
-        <article class="bg-gradient-to-br from-gray-900 to-gray-800 p-4 g flex justify-start gap-5 items-center place-content-center">
+        @if (session("success"))
+            <x-success-message :message="session('success')" />
+        @endif
+        <article class="bg-gradient-to-br my-10 from-gray-900 to-gray-800 p-4 g flex justify-start gap-5 items-center place-content-center">
             <div>
                 <div class="avatar">
                     <div class="mask mask-squircle w-24">
@@ -36,7 +39,7 @@
                 </div>
             </div>
         </article>
-        <ul class="grid grid-cols-3 mt-8">
+        <ul class="grid grid-cols-3 mt-20">
             @foreach ($user["stands"]["products"] as $product)
                 <li class="card bg-base-100 w-72 shadow-sm">
                     <figure>
@@ -48,16 +51,67 @@
                         <h2 class="card-title">{{ $product["name"]}}</h2>
                         <p> {{ $product["description"] }} </p>
                         <div class="card-actions justify-end">
-                        <button class="btn btn-outline btn-accent"><i class="bi bi-cart"></i> Ajouter au panier</button>
+                        <button class="open-modal-btn btn btn-light" data-id="{{ $product["id"] }}" onclick="my_modal_3.showModal()" class="btn btn-outline btn-light"><i class="bi bi-cart"></i> Ajouter au panier</button>
                         </div>
                     </div>
                     </li>
             @endforeach
         </ul>
+
+        <label  
+            id="user-cart" 
+            for="my_modal_7"
+            class="h-10 w-16 flex flex-col justify-center rounded-s-3xl cursor-pointer fixed text-black right-0 top-[calc(100vh/2-40px/2)] p-4 bg-white">
+            <i class="bi bi-cart3 text-2xl"></i>
+            <span  id="card-element" class="absolute -top-2 left-0 px-1 text-sm bg-red-500 rounded-lg">0</span>
+        </label>
     </section>
+
+    {{-- Modal to see products in our card --}}
+    <input type="checkbox" id="my_modal_7" class="modal-toggle" />
+    <div class="modal" role="dialog">
+        <div class="modal-box">
+            <h3 class="text-lg text-black font-bold">Liste des produits</h3>
+            <form action="/order" method="POST" id="order-form">
+                @csrf
+                <ul id="product-list" class="list text-black rounded-box shadow-md">
+                  
+                </ul>
+                <input class="stand-id" type="hidden" name="stand_id">
+                <input class="order-details" type="hidden" name="order_details">
+                <button class="btn btn-outline btn-accent mt-5">Commander</button>
+            </form>
+        </div>
+        <label class="modal-backdrop" for="my_modal_7">Close</label>
+    </div>
+
+    {{-- Modal to set a quantity for a product --}}
+    <dialog id="my_modal_3" class="modal bg-gray-600 text-black">
+        <div class="modal-box">
+            <form method="dialog">
+            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+            </form>
+            <h3 class="text-lg font-bold">Définir la quantité:</h3>
+            <input 
+                min="1" 
+                max="20" 
+                type="number" 
+                class="input product-quantity w-full"
+            >
+            <button 
+                id="card-submit" 
+                type="submit" 
+                class="btn btn-outline btn-success mt-4">
+            Ajouter au panier</button>
+        </div>
+    </dialog>
 @endsection
 
 @section("footer")
     @include("components.footer")
 @endsection
+
+@vite(["resources/js/user-cart.js"])
+
+
 
