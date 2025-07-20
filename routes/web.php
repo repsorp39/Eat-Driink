@@ -63,5 +63,4 @@ Route::controller(VisitorController::class)
         Route::get("/product-info","getCardProductInfo");
     });
 
-Route::get("/search/all",[StandController::class,"search"]);
 Route::post("/order",[OrderController::class,"order"]);

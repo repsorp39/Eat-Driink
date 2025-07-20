@@ -62,7 +62,7 @@ btnCart.addEventListener("click", async () => {
     productLists.forEach((product,i) => {
         html +=` 
             <li class="list-row">
-                <div class="text-4xl font-thin opacity-30 tabular-nums">${String(i+1).padStart(2,"0")}</div>
+                <div class="text-3xl font-thin opacity-30 tabular-nums">${String(i+1).padStart(2,"0")}</div>
                 <div><img class="size-10 rounded-box" src="${product.image_url}"/></div>
                 <div class="list-col-grow">
                     <div> ${
@@ -75,7 +75,7 @@ btnCart.addEventListener("click", async () => {
                 </span>-->
             </li>`;
     });    
-    document.getElementById("product-list").innerHTML = html;
+    if(html) document.getElementById("product-list").innerHTML = html;
 });
 
 orderForm.addEventListener("submit",()=>{

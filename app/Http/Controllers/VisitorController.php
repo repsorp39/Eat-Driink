@@ -6,22 +6,64 @@ use App\Models\Product;
 use App\Models\Stand;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response;
 
 class VisitorController extends Controller
 {
-    public function serve (){
-        //as said approved role stands
-        $stands = User::where("role","approved")->with("stands")->get();
-        return view("pages.visitor.stands-list" ,["stands" => $stands]);
+    public function serve (Request $req){
+        $query = $req->query("query");
+        if(isset($query) && !empty($query)){
+            $stands = Stand::with("user")
+                        ->where("stand_name","LIKE","%$query%")
+                        ->orWhere("description","LIKE","%$query%")
+                        ->get()
+                        ->filter(function($stand){
+                            return $stand->user->isApproved();
+                        });
+            
+            $results = [
+                "stands"   =>  $stands,
+                "query"    =>  $query
+            ];
+            return view("pages.visitor.stands-list" ,$results);
+
+        }
+
+
+         $stands = Stand::with("user",)
+            ->get()
+            ->filter(function($stand){
+                return $stand->user->isApproved();
+            });
+
+            return view("pages.visitor.stands-list" ,["stands" => $stands]);
     }
 
-    public function serveDetails(string $id){
-        $user = User::where([
-            "role"=>"approved",
-            "id" => $id
-        ])->with("stands")->with("stands.products")->get();
-        return view("pages.visitor.products-lists" ,["user" => $user[0] ?? []]);
+    public function serveDetails(Request $req, string $id){
+        $query = $req->query("query");
+        $stand = Stand::with("user")->where("id",$id)->get()[0];
+        if(isset($query) && !empty($query)){
+            $products = Product::where("stand_id",$id)
+                        ->where("name","like","%$query%")
+                        ->orWhere("description","like","%$query%")
+                        ->get();
+            return view("pages.visitor.products-lists" ,[
+                "products"  =>$products,
+                "stand"     => $stand,
+                "query"     => $query
+            ]);
+
+        }
+
+        $products = Stand::with("products")
+            ->get()
+            ->filter(function($stand) use($id){
+                return $stand->id === (int)$id;
+            });
+
+            return view("pages.visitor.products-lists" ,[
+                "products"  => isset($products[0]) ? $products[0]->products : [] ,
+                "stand"     => $stand
+            ]);
     }
 
     public function getCardProductInfo(Request $req){

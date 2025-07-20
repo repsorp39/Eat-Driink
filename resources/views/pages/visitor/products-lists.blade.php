@@ -4,11 +4,38 @@
     @include("components.header")
 @endsection
 
+
+@php
+    $isSearching = isset($query) && !empty($query)
+@endphp
+
 @section("content")
     <section class="min-h-screen">
-        <a href="{{ route("stand") }}" class="btn btn-outline btn-circle btn-light">
-            <i class="bi bi-arrow-left"></i>
-        </a>
+        <section class="flex justify-between">
+            <div>
+                <a href="{{ route("stand") }}" class="btn btn-outline btn-circle btn-light">
+                    <i class="bi bi-arrow-left"></i>
+                </a>
+            </div>
+            <section>
+                <form class="flex" action="" method="GET">
+                    <input minlength="3" value="{{ request()->query("query") }}"  name="query" class="input text-gray-600" placeholder="Rechercher un stand ou un produit..." type="search" name="" id="">
+                    <button class="btn btn-outline btn-square  btn-light"> <i class="bi bi-search"></i> </button>
+                </form>
+            </section>  
+        </section>
+        @if($isSearching)
+            @php
+                $message = "Résultats de le recherche pour ".  $query ."- ".  count($products) . " résultat(s) trouvé(s)"
+            @endphp
+           
+            @if (count($products) > 0)
+                    <x-success-message :message="$message" />
+            @else
+                    <x-error-message :message="$message" />
+            @endif
+        @endif
+        
         @if (session("success"))
             <x-success-message :message="session('success')" />
         @endif
@@ -16,32 +43,32 @@
             <div>
                 <div class="avatar">
                     <div class="mask mask-squircle w-24">
-                        <img src="{{ $user["business_img"] }}" />
+                        <img src="{{ $stand["user"]["business_img"] }}" />
                     </div>
                 </div>
             </div>
             <div class="grid grid-cols-4 place-items-center">
                 <div class="w-[250px] h-[100px]">
                     <h4 class="uppercase text-gray-600 text-[12px]">Entreprise détentrice</h4>
-                    <p> {{ $user["business_name"] }} </p>
+                    <p> {{ $stand["user"]["business_name"] }} </p>
                 </div>
                 <div class="w-[250px] h-[100px]">
                     <h4 class="uppercase text-gray-600 text-[12px]">Nom du stand</h4>
-                    <p> {{ $user["stands"]["stand_name"] }} </p>
+                    <p> {{ $stand["stand_name"] }} </p>
                 </div>
                 <div class="w-[250px] h-[100px]">
                     <h4 class="uppercase text-gray-600 text-[12px]">Description</h4>
-                    <p title="{{ $user["stands"]["description"] }}" class="text-sm"> {{ Str::limit($user["stands"]["description"],70) }} </p>
+                    <p title="{{ $stand["description"] }}" class="text-sm"> {{ Str::limit($stand["user"]["stands"]["description"],70) }} </p>
                 </div>
                 <div class="w-[250px] h-[100px] relative shadow-md border-white border-2 rounded-lg p-3">
-                    <span class="text-4xl text-emerald-700 font-bold"> {{ count($user["stands"]["products"]) }} </span>
+                    <span class="text-4xl text-emerald-700 font-bold"> {{ count($stand["user"]["stands"]["products"]) }} </span>
                     <span class="absolute right-0 bottom-0 m-2 text-gray-400 ms-4 text-NunitoBold text-lg uppercase">Produits disponibles</span>
                 </div>
             </div>
         </article>
         <ul class="grid grid-cols-3 mt-20">
-            @foreach ($user["stands"]["products"] as $product)
-                <li class="card bg-base-100 w-72 shadow-sm">
+            @foreach ($products as $product)
+                <li class="card bg-base-100 w-72 shadow-sm mt-5">
                     <figure>
                         <img
                         src="{{ $product["image_url"] }}"
@@ -49,7 +76,7 @@
                     </figure>
                     <div class="card-body bg-gray-800">
                         <h2 class="card-title">{{ $product["name"]}}</h2>
-                        <p> {{ $product["description"] }} </p>
+                        <p> {{ Str::limit($product["description"], 100) }} </p>
                         <div class="card-actions justify-end">
                         <button class="open-modal-btn btn btn-light" data-id="{{ $product["id"] }}" onclick="my_modal_3.showModal()" class="btn btn-outline btn-light"><i class="bi bi-cart"></i> Ajouter au panier</button>
                         </div>
@@ -75,11 +102,11 @@
             <form action="/order" method="POST" id="order-form">
                 @csrf
                 <ul id="product-list" class="list text-black rounded-box shadow-md">
-                  
+                  <p class="text-center m-2 text-sm text-gray-500">Votre panier est vide</p>
                 </ul>
                 <input class="stand-id" type="hidden" name="stand_id">
                 <input class="order-details" type="hidden" name="order_details">
-                <button class="btn btn-outline btn-accent mt-5">Commander</button>
+                <button class="btn btn-outline btn-success mt-5">Commander</button>
             </form>
         </div>
         <label class="modal-backdrop" for="my_modal_7">Close</label>
@@ -94,6 +121,7 @@
             <h3 class="text-lg font-bold">Définir la quantité:</h3>
             <input 
                 min="1" 
+                value="1"
                 max="20" 
                 type="number" 
                 class="input product-quantity w-full"
