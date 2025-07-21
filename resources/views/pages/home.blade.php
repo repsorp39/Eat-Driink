@@ -8,10 +8,10 @@
 
 
 @section("content")
-    <section class="flex justify-between mt-8">
+    <section class="flex justify-between items-center mt-8">
         <div class="w-1/2">
-            <h1 class="text-NunitoBold text-5xl mb-2">Eat&Drink: Gigantesque évènement culinaire</h1>
-            <p class="text-lg leading-8 text-justify">
+            <h1 class=" text-4xl font-extrabold mb-2">Eat&Drink: Gigantesque évènement culinaire</h1>
+            <p class="text-md leading-8 text-justify">
                 L'événement culinaire "Eat&Drink" rassemble de nombreux entrepreneurs (restaurateurs, artisans, etc.) et attire un large public.
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum a incidunt, ratione ducimus repellendus fugiat, dicta dignissimos illo qui corporis dolorem dolores inventore. Cupiditate saepe dignissimos fugit rem, temporibus ducimus.
                 caecati, aspernatur vitae sit nobis? Libero, numquam nihil dolores delectus et a itaque praesentium vero magnam, expedita ipsa fugit illo beatae, quibusdam aut harum. A excepturi eaque ipsa!

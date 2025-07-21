@@ -13,10 +13,7 @@
     @if(session("success"))
         <x-success-message :message="session('success')" />
     @endif
-    <x-list-product-component 
-        title="Produits"
-        description="Ajouter,modifier et supprimer les produits de votre stand"
-    >
+    <x-list-product-component>
      <div class="relative px-6 py-4 border-b border-gray-800 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-gradient-to-r from-gray-900 to-gray-800">
         <button onclick="my_modal_3.showModal()" class="absolute flex btn btn-light bg-emerald-200 font-bold right-0 top-0 m-2 shadow-lg" >
             <span  class="w-8 h-8 grid place-content-center bg-emerald-500/20 rounded-full ">

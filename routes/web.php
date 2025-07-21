@@ -64,3 +64,6 @@ Route::controller(VisitorController::class)
     });
 
 Route::post("/order",[OrderController::class,"order"]);
+
+Route::middleware(ApprovedUserMiddleware::class)
+      ->get("/orders",[OrderController::class,"serveOrder"])->name("orders");

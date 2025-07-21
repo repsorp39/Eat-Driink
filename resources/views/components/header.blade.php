@@ -1,4 +1,4 @@
-<header class="flex items-center justify-between text-NunitoRegular text-lg px-3">
+<header class="flex items-center justify-between text-NunitoRegular text-md font-medium px-3">
     <div class="w-32 h-32 shrink-0">
         <img src="/images/eat-drink-logo.png" class="w-full h-full object-cover" alt="">
     </div>
@@ -10,8 +10,7 @@
             @endguest   
             @approved()
                 <li><a href="/products" class="{{request()->routeIs("product") ? "activeLink":"" }}" >Mes produits</a></li>
-                <li><a href="#">Mes commandes</a></li>
-                <li><a href="#">Dashboard</a></li>
+                <li><a href="/orders" class="{{request()->routeIs("orders") ? "activeLink":"" }}" >Mes commandes</a></li>
             @endapproved         
             @notadmin()
                 <li><a href="/#contacter">Nous contacter</a></li>

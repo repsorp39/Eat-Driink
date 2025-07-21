@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let savedCart = localStorage.getItem("cart");
     savedCart = savedCart ? JSON.parse(savedCart)[standid] ?? [] : [];
     document.getElementById("card-element").innerText = savedCart.length;
+    if(savedCart.length === 0) orderForm.querySelector("button").disabled = true;
 });
 
 
@@ -38,7 +39,9 @@ submitButton.addEventListener("click", (e) => {
         cart[standid][foundProductIndex]["quantite"] = product.quantite;
     }
     else cart[standid] = [...(cart[standid] ?? []), product];
+    //update the product number in the card
     document.getElementById("card-element").innerText = cart[standid].length;
+    orderForm.querySelector("button").disabled = false;
     localStorage.setItem("cart", JSON.stringify(cart));
     my_modal_3.close(); //daisy_ui built in function to close modal
 });
@@ -49,13 +52,14 @@ const btnCart = document.getElementById("user-cart");
 btnCart.addEventListener("click", async () => {
     let savedCart = localStorage.getItem("cart");
     savedCart = savedCart ? JSON.parse(savedCart) : {};
+    //get all products ids
     let ids = (savedCart[standid] ?? []).map((item) => +item.id);
     ids = JSON.stringify(ids);
     let res = await fetch(`/product-info?ids=${ids}`);
     const productLists = await res.json();
     
     //now we have to fill the order form in case of submission
-    orderForm.querySelector(".order-details").value = JSON.stringify(savedCart);
+    orderForm.querySelector(".order-details").value = JSON.stringify(savedCart[standid]);
     orderForm.querySelector(".stand-id").value = standid;
 
     let html = "";
@@ -78,7 +82,7 @@ btnCart.addEventListener("click", async () => {
     if(html) document.getElementById("product-list").innerHTML = html;
 });
 
-orderForm.addEventListener("submit",()=>{
-
+orderForm.addEventListener("submit",(e)=>{
+    //when form is submitted, clean the storage
     localStorage.removeItem("cart");
 })

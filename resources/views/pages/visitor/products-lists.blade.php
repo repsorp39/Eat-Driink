@@ -39,6 +39,7 @@
         @if (session("success"))
             <x-success-message :message="session('success')" />
         @endif
+        
         <article class="bg-gradient-to-br my-10 from-gray-900 to-gray-800 p-4 g flex justify-start gap-5 items-center place-content-center">
             <div>
                 <div class="avatar">
@@ -68,14 +69,16 @@
         </article>
         <ul class="grid grid-cols-3 mt-20">
             @foreach ($products as $product)
-                <li class="card bg-base-100 w-72 shadow-sm mt-5">
-                    <figure>
+                <li class="card bg-base-100 w-72 shadow-sm mt-5 relative">
+                    <figure class="h-[170px]">
                         <img
+                        class="object-cover"
                         src="{{ $product["image_url"] }}"
                         alt="{{  $product["name"] }}" />
                     </figure>
                     <div class="card-body bg-gray-800">
-                        <h2 class="card-title">{{ $product["name"]}}</h2>
+                        <span class="p-2 text-center bg-gray-700 left-0 m-3 rounded-2xl"> {{ $product["price"] }} FCFA</span>
+                        <h2 class="card-title">{{ $product["name"]}} </h2>
                         <p> {{ Str::limit($product["description"], 100) }} </p>
                         <div class="card-actions justify-end">
                         <button class="open-modal-btn btn btn-light" data-id="{{ $product["id"] }}" onclick="my_modal_3.showModal()" class="btn btn-outline btn-light"><i class="bi bi-cart"></i> Ajouter au panier</button>
