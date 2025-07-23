@@ -47,7 +47,7 @@
                                     <h2 class="card-title"> {{ $stand["stand_name"] }} </h2>
                                     <p> {{ Str::limit($stand["description"],100) }} </p>
                                     <div class="card-actions">
-                                        <a href="{{ route("stand-info",["id" => $stand["id"]]) }}" class="btn btn-soft btn-neutral">Visiter</a>
+                                        <a href="{{ route("stand-info",["id" => $stand["id"]]) }}" class="btn btn-outline btn-success">Visiter</a>
                                     </div>
                                 </div>
                             </div>                

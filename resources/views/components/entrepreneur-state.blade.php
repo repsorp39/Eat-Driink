@@ -79,8 +79,8 @@
                                         >
                                     </div>
                                     <div class="ml-4">
-                                        <div class="text-sm font-medium text-white">{{ $request['owner_fullname'] }}</div>
-                                        <div class="text-sm text-gray-400">{{ $request['business_name'] }}</div>
+                                        <div class="text-sm font-medium text-white"> {{ $request['business_name'] }} </div>
+                                        <div class="text-sm text-gray-400">{{ $request['email'] }}</div>
                                     </div>
                                 </div>
                             </td>

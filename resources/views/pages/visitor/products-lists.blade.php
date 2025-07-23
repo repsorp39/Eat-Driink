@@ -19,14 +19,14 @@
             </div>
             <section>
                 <form class="flex" action="" method="GET">
-                    <input minlength="3" value="{{ request()->query("query") }}"  name="query" class="input text-gray-600" placeholder="Rechercher un stand ou un produit..." type="search" name="" id="">
+                    <input minlength="3" value="{{ request()->query("query") }}"  name="query" class="input text-gray-600" placeholder="Rechercher un produit..." type="search" name="" id="">
                     <button class="btn btn-outline btn-square  btn-light"> <i class="bi bi-search"></i> </button>
                 </form>
             </section>  
         </section>
         @if($isSearching)
             @php
-                $message = "Résultats de le recherche pour ".  $query ."- ".  count($products) . " résultat(s) trouvé(s)"
+                $message = "Résultats de le recherche pour `".  $query ."` - ".  count($products) . " résultat(s) trouvé(s)"
             @endphp
            
             @if (count($products) > 0)

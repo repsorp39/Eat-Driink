@@ -39,6 +39,8 @@ return [
         'business_img' => [
             'image' => 'Le fichier doit être une image (formats acceptés: jpg, png, gif,jpeg)',
             'max' => 'La taille de l\'image ne doit pas dépasser 2MB',
+            'mimes' => 'Format images autorisées:png,jpeg,jpg'
+
         ],
         'stand_name' => [
             'required' => 'Le nom du stand est requis',

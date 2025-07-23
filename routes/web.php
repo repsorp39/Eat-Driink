@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\StandController;
 use App\Http\Controllers\VisitorController;
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('pages.home');
-});
+})->name("home");
 
 Route::get("/stand-request", [StandController::class,'serve'])->name("stand-form");
 
@@ -67,3 +68,7 @@ Route::post("/order",[OrderController::class,"order"]);
 
 Route::middleware(ApprovedUserMiddleware::class)
       ->get("/orders",[OrderController::class,"serveOrder"])->name("orders");
+
+Route::get("/profil",[ProfilController::class,"serve"])
+    ->middleware(ApprovedUserMiddleware::class)
+    ->name("profil");

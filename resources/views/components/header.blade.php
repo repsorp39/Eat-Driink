@@ -4,17 +4,17 @@
     </div>
     <nav>
         <ul class="flex items-center gap-5">
-            <li><a href="/">Accueil</a></li>
+            <li><a href="/" class="{{request()->routeIs("home") ? "activeLink":"" }}" >Accueil</a></li>
             @guest
                 <li><a href="/stands" class="{{request()->routeIs("stand") || request()->routeIs("stand-info") ? "activeLink":"" }}" >Nos exposants</a></li>
+                <li><a href="/#contacter">Nous contacter</a></li>
             @endguest   
             @approved()
                 <li><a href="/products" class="{{request()->routeIs("product") ? "activeLink":"" }}" >Mes produits</a></li>
                 <li><a href="/orders" class="{{request()->routeIs("orders") ? "activeLink":"" }}" >Mes commandes</a></li>
+                <li><a href="/profil" class="{{request()->routeIs("profil") ? "activeLink":"" }}" >Profil</a></li>
             @endapproved         
-            @notadmin()
-                <li><a href="/#contacter">Nous contacter</a></li>
-            @endnotadmin
+
             @admin
                 <li>
                     <a

@@ -16,7 +16,7 @@ class RegisterController extends Controller
             "email"          => ["required", "unique:users", "email"],
             "password"       => ["required", Password::min(8)],
             "owner_fullname" => ["required", "regex:/^[\p{L}\s\-\.\']+$/u"],
-            "business_img" => ["image","mimes:jpeg,png,jpg,gif","max:2048"],
+            "business_img" => ["image","mimes:jpeg,png,jpg","max:2048"],
             "stand_name" => ["required", "max:120"],
             "description" => ["required", "max:300"],
         ]);

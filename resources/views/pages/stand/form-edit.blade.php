@@ -46,8 +46,7 @@
                <input type="hidden" name="product_id" value="{{ request()->route('id') }}">
         </fieldset>
         
-        <span onclick="my_modal_3.close()" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</span>
-        <button class="w-full btn btn-success mt-3">Ajouter</button>
+        <button class="w-full btn btn-success mt-3">Modifier</button>
     </form>
 </div>
 @endsection

@@ -13,7 +13,7 @@
                 <div class="w-24 h-16 p-3">
                     <img src="/images/eat-drink-logo.png"  alt="">
                 </div>
-                <h1 class="text-gray-400 p-3 text-xl font-extrabold">Demande de stands</h1>
+                <h1 class="text-gray-50 p-3 text-xl font-light">Demande de stands</h1>
             </div>
             <form action="{{ route("stand-request") }}" method="POST" class="p-3 [&_input]:text-black" enctype="multipart/form-data">
                 @csrf
@@ -123,7 +123,7 @@
                             name="description" 
                             placeholder="Les pommes c'est la vie!" 
                             value="{{ old("description") }}"
-                        ></textarea>
+                        > {{ old("description") }} </textarea>
                         @error("description")
                             <p class="label text-red-700"> {{ $message }} </p>
                         @enderror

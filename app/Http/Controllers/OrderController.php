@@ -18,25 +18,26 @@ class OrderController extends Controller
     public function serveOrder(Request $req){
             $stand = Stand::where("user_id",Auth::user()->id)->get();
             $orders = Order::where('stand_id',$stand[0]->id)->get()->toArray();
-            //each orders is saved in the db as a json data
+            //each order is saved in the db as  json data
             //so after recuperation of our orders, we use map to pass throuh each an to make it as array
             // The true in json_decode enforce php to convert our var in array by defautl it doesn't do that
             $ordersDetails = array_map(fn($order) => json_decode($order["order_details"],true),$orders);
             $ordersList = [];
-            
+
             if(count($ordersDetails) > 0){
                  //now for each products let's recuperate the product 
                  foreach($ordersDetails as $orderDetail){
                     $details = [];
                     foreach($orderDetail as $order){
-                        $orderProduct = Product::whereId($order['id'])->get()->toArray()[0];
+                        $orderProduct = Product::whereId($order['id'])->get()->toArray();
+                        if(count($orderProduct) === 0)  continue;
+                        $orderProduct = $orderProduct[0];
                         $details[] = $orderProduct + ["quantite" => $order['quantite']];
                     }
                     $ordersList[] = $details;
                 }
             }
 
-        
         return view("pages.orders.orders",["ordersList" => $ordersList]); 
     }
 }

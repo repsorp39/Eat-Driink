@@ -54,16 +54,12 @@ class VisitorController extends Controller
 
         }
 
-        $products = Stand::with("products")
-            ->get()
-            ->filter(function($stand) use($id){
-                return $stand->id === (int)$id;
-            });
-
-            return view("pages.visitor.products-lists" ,[
-                "products"  => isset($products[0]) ? $products[0]->products : [] ,
-                "stand"     => $stand
-            ]);
+            
+        $products = Product::where("stand_id",$stand->id)->get();
+        return view("pages.visitor.products-lists" ,[
+            "products"  => $products ,
+            "stand"     => $stand
+        ]);
     }
 
     public function getCardProductInfo(Request $req){

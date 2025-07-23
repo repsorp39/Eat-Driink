@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Validator;
 class ProductController extends Controller
 {
     public function serve(){
-        $products = Product::all()->toArray();
+        $stand_id = Stand::where("user_id",Auth::user()->id)->get()->toArray()[0]["id"];
+        $products = Product::where("stand_id",$stand_id)->orderByDesc("created_at")->get();
         return view("pages.stand.products",["products" => $products]);
     }
 
@@ -46,9 +47,7 @@ class ProductController extends Controller
         }
 
         $validated = $validator->validated();
-        $validated["stand_id"] = User::find(Auth::user()->id)
-            ->with("stands")->get()
-            ->toArray()[0]["stands"]["id"];
+        $validated["stand_id"] = Stand::where("user_id",Auth::user()->id)->get()->toArray()[0]["id"];;
         $imagePath = $req->file("image_url")->store("images","public");
         $validated["image_url"] = env("APP_URL")."/storage/".$imagePath;
         Product::create($validated);
