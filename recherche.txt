@@ -1,0 +1,38 @@
+1-  Mock
+	C'est l'action d'utiliser des set de  fausses données ayant le mm schema que les données attendus afin de tester 
+	des modules ou des appli. De cette façon on controle les données utiliser et on prévoit les cas d'erreurs associées.
+	Pour cela, on peut utiliser des façades ou des librairies spécialisées
+
+	--
+
+	On spécifie le comportement qu'une fonction devrait avoir  lorsqu'on l'appel,et c'esct censé
+	copier celui d'un vrai service. Par exemple, on veut tester une fonctionnalité et au cours 
+	du test, il faut payer par kkipay qui prend des donnes et renvoit un retour.
+	Pour simuler ce comportement on utilise un mock auquel on passe le schema  des vrai donnes 
+
+2- Stub
+	C'est un composant de remplacement dont le rôle est de simuler les fonctions d'un vrai composant.
+	 Mais lors des tests, on ne veut pas que le composant lui mm soit impacter, donc on creer un composant 
+	 qui retourne des donneés prédéfinis et réagis aux appels de fonctions comme prédéfinies.
+	
+	--
+
+	C'est juste le retour de cette fonction qui nous interesse. Par exemple peut importe la procedure, 
+	on veut les statuts PENDING ou ENCOURS ou AUTRE
+
+3-  Spy
+	Ce sont des  fake fonctions qui jouent exactement le mm rôle que de fonctions réelles de l'app. 
+	Elles peuvent wrapper de veritables functions et enregistrer des info sur comment ces func fonctionnent.
+	Par exemple, si S est mon spy et F ma fonction réelle, F joue le rôle A, S aussi joue A puis record comment a  F fait A.
+
+	-- on veut verifier si une fonction a bien été appelée.
+
+4- Fake
+	-- C'est de créer un  Interface globale 
+
+5- Dummy
+	C'est un composant necessaire pour que le test se déroule bien. Mais lui mm n'interagis pas dans l'exécution ou dans ce qu'on veut tester.
+
+Notif
+Storage
+Mail
